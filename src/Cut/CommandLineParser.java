@@ -1,14 +1,11 @@
 package Cut;
 
-
-import java.util.regex.*;
-
 public class CommandLineParser {
     private String input = "", output = "";
-    private int nRange = -1, kRange = -1;
+    private int nRange = 0, kRange = -1;
     private boolean chars = false, words = false;
 
-    public CommandLineParser(String[] args) {
+    CommandLineParser(String[] args) {
         StringBuilder check = new StringBuilder(args[0]);
         for (int i = 1; i < args.length; i++) {
             check.append(' ').append(args[i]);
@@ -31,7 +28,7 @@ public class CommandLineParser {
             }
         }
 
-        String[] range = args[args.length-1].split("-");
+        String[] range = args[args.length - 1].split("-");
         if (!range[0].equals("")) nRange = Integer.parseInt(range[0]);
         if (!range[1].equals("")) kRange = Integer.parseInt(range[1]);
     }
