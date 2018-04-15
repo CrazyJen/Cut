@@ -2,7 +2,7 @@ package Cut;
 
 public class CommandLineParser {
     private String input = "", output = "";
-    private int nRange = 0, kRange = -1;
+    private int nRange = 1, kRange = -1;
     private boolean chars = false, words = false;
 
     CommandLineParser(String[] args) {
@@ -31,6 +31,7 @@ public class CommandLineParser {
         String[] range = args[args.length - 1].split("-");
         if (!range[0].equals("")) nRange = Integer.parseInt(range[0]);
         if (!range[1].equals("")) kRange = Integer.parseInt(range[1]);
+        if (kRange != -1 && kRange < nRange) throw new IllegalArgumentException("Wrong range");
     }
 
     public String getInput() {
