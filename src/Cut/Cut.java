@@ -46,7 +46,7 @@ public class Cut {
                     outputText[i] = outputString;
                 }
             }
-        write(outputText);
+        write(outputText, commandLine.getOutput());
     }
 
     private static String[] read(String fileName) {
@@ -76,7 +76,19 @@ public class Cut {
         return result;
     }
 
-    private static void write(String[] output) {
-
+    private static void write(String[] outputText, String fileName) {
+        StringBuilder output = new StringBuilder(outputText[0]);
+        for (int i = 1; i < outputText.length; i++) {
+            output.append("\n").append(outputText[i]);
+        }
+        if (!fileName.equals("")){
+            try{
+                FileWriter out = new FileWriter(fileName);
+                out.write(output.toString());
+                out.close();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        } else System.out.println(output.toString());
     }
 }
