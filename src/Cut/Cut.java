@@ -33,9 +33,20 @@ public class Cut {
                     outputText[i] = newString.toString();
                 }
             }
-        else for (int i = 0; i < inputText.length; i++) {
-
-        }
+        else
+            for (int i = 0; i < inputText.length; i++) {
+                String inputString = inputText[i];
+                String outputString;
+                if (begin > inputString.length()) outputText[i] = "";
+                else {
+                    if (end < inputString.length() && end > 0)
+                        outputString = inputString.substring(begin - 1, end - 1);
+                    else
+                        outputString = inputString.substring(begin - 1);
+                    outputText[i] = outputString;
+                }
+            }
+        write(outputText);
     }
 
     private static String[] read(String fileName) {
@@ -63,5 +74,9 @@ public class Cut {
         String[] result = new String[inputList.size()];
         result = inputList.toArray(result);
         return result;
+    }
+
+    private static void write(String[] output) {
+
     }
 }
