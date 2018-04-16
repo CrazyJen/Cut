@@ -1,5 +1,0 @@
-package Cut;
-
-class Test {
-
-}
