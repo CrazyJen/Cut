@@ -56,10 +56,9 @@ public class Cut {
             String readString;
             if (fileName.equals("")) {
                 Scanner reader = new Scanner(System.in);
-                if (reader.hasNext())
-                    String inputText = reader.next();
-                reader.close();
-                return inputText.split("\n");
+                while (reader.hasNextLine()) {   //Прерывание ввода осущесвтляется нажатием Ctrl+D
+                    inputList.add(reader.nextLine());
+                }
             } else {
                 File file = new File(fileName);
                 BufferedReader reader =
