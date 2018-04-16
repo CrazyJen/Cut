@@ -17,21 +17,34 @@ public class CommandLineParser {
             switch (args[i]) {
                 case ("-c"):
                     chars = true;
+                    break;
                 case ("-w"):
                     words = true;
+                    break;
                 case ("-o"): {
                     output = args[i + 1];
                     String s = args[i + 2];
                     if (s.matches("\\w+\\.txt")) input = s;
                 }
-                default:
+                break;
             }
         }
+        if (output.equals("") &&
+                args[args.length - 2].matches("\\w+\\.txt"))
+            input = args[args.length - 2];
 
-        String[] range = args[args.length - 1].split("-");
-        if (!range[0].equals("")) nRange = Integer.parseInt(range[0]);
-        if (!range[1].equals("")) kRange = Integer.parseInt(range[1]);
-        if (kRange != -1 && kRange < nRange) throw new IllegalArgumentException("Wrong range");
+        String range = args[args.length - 1];
+        if (range.matches("\\d+-"))
+            nRange = Integer.parseInt(range.substring(0, range.length() - 1));
+        else if (range.matches("-\\d+"))
+            kRange = Integer.parseInt(range.substring(1));
+        else {
+            String[] parsedRange = range.split("-");
+            nRange = Integer.parseInt(parsedRange[0]);
+            kRange = Integer.parseInt(parsedRange[1]);
+        }
+        if (kRange != -1 && kRange < nRange)
+            throw new IllegalArgumentException("Wrong range");
     }
 
     public String getInput() {

@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Cut {
     public static void main(String[] args) {
@@ -22,9 +23,9 @@ public class Cut {
                 if (begin > inputString.length) outputText[i] = "";
                 else {
                     if (end < inputString.length && end > 0)
-                        outputString = Arrays.copyOfRange(inputString, begin - 1, end - 1);
+                        outputString = Arrays.copyOfRange(inputString, begin - 1, end);
                     else
-                        outputString = Arrays.copyOfRange(inputString, begin - 1, inputString.length - 1);
+                        outputString = Arrays.copyOfRange(inputString, begin - 1, inputString.length);
 
                     StringBuilder newString = new StringBuilder(outputString[0]);
                     for (int j = 1; j < outputString.length; j++) {
@@ -40,7 +41,7 @@ public class Cut {
                 if (begin > inputString.length()) outputText[i] = "";
                 else {
                     if (end < inputString.length() && end > 0)
-                        outputString = inputString.substring(begin - 1, end - 1);
+                        outputString = inputString.substring(begin - 1, end);
                     else
                         outputString = inputString.substring(begin - 1);
                     outputText[i] = outputString;
@@ -54,14 +55,15 @@ public class Cut {
         try {
             String readString;
             if (fileName.equals("")) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-                while ((readString = reader.readLine()) != null) {
-                    inputList.add(readString);
-                }
+                Scanner reader = new Scanner(System.in);
+                if (reader.hasNext())
+                    String inputText = reader.next();
                 reader.close();
+                return inputText.split("\n");
             } else {
                 File file = new File(fileName);
-                BufferedReader reader = new BufferedReader(new FileReader(file));
+                BufferedReader reader =
+                        new BufferedReader(new FileReader(file));
                 while ((readString = reader.readLine()) != null) {
                     inputList.add(readString);
                 }
@@ -81,8 +83,8 @@ public class Cut {
         for (int i = 1; i < outputText.length; i++) {
             output.append("\n").append(outputText[i]);
         }
-        if (!fileName.equals("")){
-            try{
+        if (!fileName.equals("")) {
+            try {
                 FileWriter out = new FileWriter(fileName);
                 out.write(output.toString());
                 out.close();
