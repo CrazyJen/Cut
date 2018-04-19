@@ -5,7 +5,7 @@ public class CommandLineParser {
     private int nRange = 1, kRange = -1;
     private boolean chars = false, words = false;
 
-    CommandLineParser(String[] args) {
+    public CommandLineParser(String[] args) {
         StringBuilder check = new StringBuilder(args[0]);
         for (int i = 1; i < args.length; i++) {
             check.append(' ').append(args[i]);

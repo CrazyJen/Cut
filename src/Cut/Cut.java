@@ -7,14 +7,19 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Cut {
-    public static void main(String[] args) {
-        cut(args);
-    }
 
-    private static void cut(String[] args) {
+    private String[] outputText;
+
+    public static void main(String[] args) {
+        Cut cut = new Cut();
         CommandLineParser commandLine = new CommandLineParser(args);
         String[] inputText = read(commandLine.getInput());
-        String[] outputText = new String[inputText.length];
+        cut.cut(commandLine, inputText);
+        cut.write(commandLine.getOutput());
+    }
+
+    private void cut(CommandLineParser commandLine, String[] inputText) {
+        outputText = new String[inputText.length];
         int begin = commandLine.getnRange(), end = commandLine.getkRange();
         if (commandLine.isWords())
             for (int i = 0; i < inputText.length; i++) {
@@ -47,7 +52,6 @@ public class Cut {
                     outputText[i] = outputString;
                 }
             }
-        write(outputText, commandLine.getOutput());
     }
 
     private static String[] read(String fileName) {
@@ -77,7 +81,7 @@ public class Cut {
         return result;
     }
 
-    private static void write(String[] outputText, String fileName) {
+    private void write(String fileName) {
         StringBuilder output = new StringBuilder(outputText[0]);
         for (int i = 1; i < outputText.length; i++) {
             output.append("\n").append(outputText[i]);
